@@ -1,35 +1,35 @@
-import { Cliente } from "../models/Cliente.js";
+import { Funcionario } from "../models/Funcionario.js";
 
-class ClienteService {
+class FuncionarioService {
   
   static async findAll(req, res) {
-    const objs = await Cliente.findAll();
+    const objs = await Funcionario.findAll();
     return objs;
   }
 
   static async findByPk(req, res) {
     const { id } = req.params;
-    const obj = await Cliente.findByPk(id);
+    const obj = await Funcionario.findByPk(id);
     return obj;
   }
 
   static async create(req, res) {
     const { nome, cpf, nascimento } = req.body;
 
-    // Regra de negócio: não podem existir dois clientes com o mesmo cpf
-    const objByCpf = await Cliente.findAll({where : {cpf: cpf}});
+    // Regra de negócio: não podem existir dois Funcionarios com o mesmo cpf
+    const objByCpf = await Funcionario.findAll({where : {cpf: cpf}});
     if (objByCpf.length == 1){
-      throw new Error ("Já existe um cliente com este CPF");
+      throw new Error ("Já existe um Funcionario com este CPF");
     }
 
-    const obj = await Cliente.create({ nome, cpf, nascimento });
+    const obj = await Funcionario.create({ nome, cpf, nascimento });
     return obj;
   }
 
   static async update(req, res) {
     const { id } = req.params;
     const { nome, cpf, nascimento } = req.body;
-    var obj = await Cliente.findOne({ where: { id: id } });
+    var obj = await Funcionario.findOne({ where: { id: id } });
     Object.assign(obj, { nome, cpf, nascimento });
     obj = await obj.save();
     return obj;
@@ -37,11 +37,11 @@ class ClienteService {
 
   static async delete(req, res) {
     const { id } = req.params;
-    var obj = await Cliente.findByPk(id);
+    var obj = await Funcionario.findByPk(id);
     obj = await obj.destroy();
     return obj;
   }
 
 }
 
-export { ClienteService };
+export { FuncionarioService };

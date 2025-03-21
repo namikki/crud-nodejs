@@ -1,33 +1,33 @@
-import { ClienteService } from "../services/ClienteService.js";
+import { FuncionarioService } from "../services/FuncionarioService.js";
 
-class ClienteController {
+class FuncionarioController {
 
   static async findAll(req, res) {
-    ClienteService.findAll()
+    FuncionarioService.findAll()
       .then(objs => res.json(objs))
       .catch(err => res.status(400).json({ err: err.message }));
   }
 
   static async findByPk(req, res) {
-    ClienteService.findByPk(req)
+    FuncionarioService.findByPk(req)
       .then(obj => res.json(obj))
       .catch(err => res.status(400).json({ err: err.message }));
   }
 
   static async create(req, res) {
-    ClienteService.create(req)
+    FuncionarioService.create(req)
       .then(obj => res.json(obj))
       .catch(err => res.status(400).json({ err: err.message }));
   }
 
   static async update(req, res) {
-    ClienteService.update(req)
+    FuncionarioService.update(req)
       .then(obj => res.json(obj))
       .catch(err => res.status(400).json({ err: err.message }));
   }
 
   static async delete(req, res) {
-    ClienteService.delete(req)
+    FuncionarioService.delete(req)
       .then(obj => res.json(obj))
       .catch(err => res.status(400).json({ err: err.message }));
   }
@@ -35,4 +35,4 @@ class ClienteController {
 }
 
 
-export { ClienteController };
+export { FuncionarioController };
